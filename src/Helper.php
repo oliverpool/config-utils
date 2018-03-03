@@ -10,4 +10,10 @@ class Helper
         $jf = new JsonFile($filename);
         return new Stored($jf, new IlluminateConfig($jf->load() ?? []));
     }
+
+    public static function jsonShadowedIlluminateConfig($filename, $initial)
+    {
+        $jsonConf = static::jsonIlluminateConfig($filename);
+        return new Shadowed($jsonConf, new IlluminateConfig($initial));
+    }
 }

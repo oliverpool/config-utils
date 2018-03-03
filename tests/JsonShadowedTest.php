@@ -13,8 +13,7 @@ class JsonShadowedTest extends Basetest
     {
         $file = tempnam(sys_get_temp_dir(), 'config.json');
 
-        $jsonConf = Helper::jsonIlluminateConfig($file);
-        $shadowed = new Shadowed($jsonConf, new IlluminateConfig(['a' => 42]));
+        $shadowed = Helper::jsonShadowedIlluminateConfig($file, ['a' => 42]);
         $this->assertEquals(42, $shadowed->get('a'));
         $this->assertNull($shadowed->get('b'));
         $shadowed->set('a', 43);
