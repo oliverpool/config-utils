@@ -5,19 +5,12 @@ use Illuminate\Contracts\Config\Repository as ConfigContract;
 class Stored implements ConfigContract
 {
     protected $storage;
-    protected $factory;
     protected $config;
 
-    public function __construct(Storage $storage, IFactory $factory)
+    public function __construct(Storage $storage, ConfigContract $initial)
     {
         $this->storage = $storage;
-        $this->factory = $factory;
-        $this->load();
-    }
-
-    protected function load()
-    {
-        $this->config = $this->factory->make($this->storage->load() ?? []);
+        $this->config = $initial; // usually loaded via $this->storage->load() ?? []
     }
 
     protected function store()
