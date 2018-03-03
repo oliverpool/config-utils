@@ -1,5 +1,6 @@
 <?php namespace Oliverpool\Config;
 
+use Illuminate\Config\Repository;
 use Illuminate\Contracts\Config\Repository as ConfigContract;
 
 /**
@@ -7,7 +8,10 @@ use Illuminate\Contracts\Config\Repository as ConfigContract;
 *
 *  @author oliverpool
 */
-interface Factory
+class Factory implements IFactory
 {
-    public function make($items) : ConfigContract;
+    public function make($items) : ConfigContract
+    {
+        return new Repository($items);
+    }
 }
